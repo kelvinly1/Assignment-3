@@ -91,12 +91,19 @@ WHERE S.SaleID IN (1,2,3);
 /*******************************/
 
 /* LastName, FirstName, and Phone of customers who have made at least one purchase with SubTotal greater than $500. Use a subquery*/
-SELECT LastName, FirstName, Phone
+SELECT CustomerID, LastName, FirstName, Phone 
 FROM CUSTOMER
-WHERE CustomerID IN
+WHERE CustomerID IN 
   (SELECT CustomerID
    FROM SALE
-   WHERE SubTotal > 500)   
-   
-/*******************************/  
-  
+   WHERE SubTotal > 500);
+/*******************************/
+ 
+/* LastName, FirstName, and Phone of customers who have made at least one purchase with SubTotal greater than $500. Use a JOIN*/
+SELECT C.CustomerID, LastName, FirstName, Phone
+FROM CUSTOMER AS C INNER JOIN SALE AS S
+  ON C.CustomerID = S.CustomerID
+WHERE S.SubTotal > 500;
+
+/*******************************/
+

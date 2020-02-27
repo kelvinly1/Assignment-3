@@ -55,7 +55,7 @@ AND VENDOR.CompanyName LIKE 'New%'
 /*******************************/
 
 /* Listing LastName, FirstName, and Phone of the customer who made the purchase with SaleID 1 using a subquery*/
-SELECT FirstName, LastName, Phone
+SELECT LastName, FirstName, Phone
 FROM CUSTOMER
 WHERE CustomerID IN
 	(SELECT SaleID
@@ -65,7 +65,7 @@ WHERE CustomerID IN
 /*******************************/
 
 /* Listing LastName, FirstName, and Phone of the customer who made the purchase with SaleID 1 using an inner join*/
-SELECT FirstName, LastName, Phone
+SELECT LastName, FirstName, Phone
 FROM CUSTOMER AS C INNER JOIN SALE AS S
   ON C.CustomerID  = S.CustomerID
  WHERE S.SaleID = 1;

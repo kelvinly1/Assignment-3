@@ -63,3 +63,10 @@ WHERE CustomerID IN
 	WHERE SaleID = 1)
 
 /*******************************/
+
+
+/* Listing LastName, FirstName, and Phone of the customer who made the purchase with SaleID 1 using an inner join*/
+SELECT FirstName, LastName, Phone
+FROM CUSTOMER AS C INNER JOIN SALE AS S
+  ON C.CustomerID  = S.CustomerID
+ WHERE S.SaleID = 1

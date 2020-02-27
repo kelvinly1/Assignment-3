@@ -58,7 +58,7 @@ AND VENDOR.CompanyName LIKE 'New%'
 SELECT LastName, FirstName, Phone
 FROM CUSTOMER
 WHERE CustomerID IN
-	(SELECT SaleID
+	(SELECT CustomerID
 	FROM SALE
 	WHERE SaleID = 1);
 	

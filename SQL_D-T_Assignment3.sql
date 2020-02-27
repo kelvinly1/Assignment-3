@@ -89,6 +89,14 @@ FROM CUSTOMER AS C INNER JOIN SALE AS S
 WHERE S.SaleID IN (1,2,3);
 
 /*******************************/
-  
-  
+
+/* LastName, FirstName, and Phone of customers who have made at least one purchase with SubTotal greater than $500. Use a subquery*/
+SELECT LastName, FirstName, Phone
+FROM CUSTOMER
+WHERE CustomerID IN
+  (SELECT CustomerID
+   FROM SALE
+   WHERE SubTotal > 500)   
+   
+/*******************************/  
   

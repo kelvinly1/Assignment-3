@@ -50,7 +50,7 @@ SELECT ItemID, ItemDescription, CompanyName AS 'Vendor_Company_Name'
 FROM ITEM INNER JOIN VENDOR
 	ON  ITEM.VendorID = VENDOR.VendorID
 WHERE ITEM.ItemCost >= 1000
-AND VENDOR.CompanyName LIKE 'New%'
+AND VENDOR.CompanyName LIKE '%New'
 
 /*******************************/
 

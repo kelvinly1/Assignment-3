@@ -60,15 +60,24 @@ FROM CUSTOMER
 WHERE CustomerID IN
 	(SELECT SaleID
 	FROM SALE
-	WHERE SaleID = 1)
-
+	WHERE SaleID = 1);
+	
 /*******************************/
 
-
 /* Listing LastName, FirstName, and Phone of the customer who made the purchase with SaleID 1 using an inner join*/
+
 SELECT FirstName, LastName, Phone
 FROM CUSTOMER AS C INNER JOIN SALE AS S
   ON C.CustomerID  = S.CustomerID
- WHERE S.SaleID = 1
+ WHERE S.SaleID = 1;
  
  /*******************************/
+
+/* LastName, FirstName, and Phone of the customers who made the purchases with SaleIDs 1, 2, and 3. Use a subquery.*/
+
+SELECT LastName, FirstName, Phone  
+FROM CUSTOMER
+WHERE CustomerID IN   
+  (SELECT CustomerID
+  FROM SALE
+  WHERE SaleID IN (1,2,3));

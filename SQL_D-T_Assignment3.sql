@@ -66,19 +66,19 @@ WHERE CustomerID IN
 
 /* Listing LastName, FirstName, and Phone of the customer who made the purchase with SaleID 1 using an inner join*/
 SELECT LastName, FirstName, Phone
-FROM CUSTOMER AS C INNER JOIN SALE AS S
-  ON C.CustomerID  = S.CustomerID
- WHERE S.SaleID = 1;
+FROM CUSTOMER, SALE
+WHERE Customer.CustomerID  = Sale.SaleID AND SaleID = 1;
+
  
  /*******************************/
 
 /* LastName, FirstName, and Phone of the customers who made the purchases with SaleIDs 1, 2, and 3 using asubquery.*/
 SELECT LastName, FirstName, Phone  
 FROM CUSTOMER
-WHERE CustomerID IN   
-  (SELECT CustomerID
+WHERE SaleID IN   
+  (SELECT DISTINCT SaleID
   FROM SALE
-  WHERE SaleID IN (1,2,3));
+  WHERE SaleID BETWEEN 1 AND 3);
   
 /*******************************/
 
@@ -88,12 +88,16 @@ FROM CUSTOMER AS C INNER JOIN SALE AS S
   ON C.CustomerID = S.CustomerID
 WHERE S.SaleID IN (1,2,3);
 
+SELECT LastName, FirstName, Phone
+FROM CUSTOMER, SALE
+WHERE CUSTOMER.CustomerID = SALE.SaleID AND SaleId <= 3;
+
 /*******************************/
 
 /* LastName, FirstName, and Phone of customers who have made at least one purchase with SubTotal greater 
 than $500. Use a subquery */
 
-SELECT CustomerID, LastName, FirstName, Phone 
+SELECT LastName, FirstName, Phone 
 FROM CUSTOMER
 WHERE CustomerID IN 
   (SELECT CustomerID
@@ -104,8 +108,8 @@ WHERE CustomerID IN
 /* LastName, FirstName, and Phone of customers who have made at least one purchase with SubTotal greater 
 than $500. Use a JOIN */
 
-SELECT C.CustomerID, LastName, FirstName, Phone
-FROM CUSTOMER AS C INNER JOIN SALE AS S
+SELECT DISTINCT C.CustomerID, LastName, FirstName, Phone
+FROM CUSTOMER AS C JOIN SALE AS S
   ON C.CustomerID = S.CustomerID
 WHERE S.SubTotal > 500;
 
@@ -114,16 +118,70 @@ WHERE S.SubTotal > 500;
 /* Listing the LastName, FirstName, and Phone of customers who
 have purchased an item that has an ItemPrice of $500 or more. Use a subquery.*/ 
 
+/* M */
+SELECT LastName, FirstName, Phone
+FROM   CUSTOMER
+WHERE  CustomerID IN
+	(SELECT CustomerID
+	 FROM SALE
+	 WHERE SaleID IN
+	 (SELECT SaleID
+	  FROM SALE_ITEM
+	  WHERE ItemPrice > 500));
+
 	/* Use the CUSTOMER, SALE, AND SALE_ITEM tables. Refer to P.185.
 	For Inner Join on the three tables, refer to p. 191 */
+	
+/* N */
+SELECT LastName, FirstName, Phone
+FROM CUSTOMER AS C JOIN SALE AS S
+	ON C.CustomerID = S.SaleID
+	JOIN SALE_ITEM AS SI
+	ON S.SaleID = SI.SaleID
+WHERE ItemPrice > 500;
 
 /*******************************/
 
 /* LastName, FirstName, and Phone of customers who have purchased an item that was supplied by a vendor with a 
 CompanyName that begins with the letter L. Use a subquery. */
-	
+
+SELECT LastName, FirstName, Phone
+FROM CUSTOMER
+WHERE CustomerID IN
+	(SELECT CustomerID
+	 FROM SALE
+	 WHERE SaleID IN
+	 (Select SaleID
+	 FROM SALE_ITEM
+	 WHERE ItemID IN
+	 (SELECT ItemID 
+	  FROM ITEM
+	  WHERE VendorID IN
+	  (SELECT VendorID 
+	   FROM VENDOR
+	   WHERE CompanyName LIKE 'L%'))));
+	   
 	/* Use the CUSTOMERS, SALE, */
 
 /*******************************/
 
+/*P*/
+SELECT DISTINCT LastName, FirstName, Phone
+FROM CUSTOMER AS C JOIN SALE AS S
+	ON C.CustomerID = S.SaleID
+	JOIN SALE_ITEM AS SI
+	ON S.SaleID = SI.SaleID
+	JOIN ITEM AS I
+	ON SI.ItemID = I.ItemID
+	JOIN VENDOR AS V
+	ON I.VendorID = V.VendorID
+	WHERE CompanyName LIKE 'L%';
 
+/* Q */
+
+/*R */
+SELECT
+
+/* S */
+
+/* T */

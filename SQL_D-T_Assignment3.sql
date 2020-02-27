@@ -70,3 +70,5 @@ SELECT FirstName, LastName, Phone
 FROM CUSTOMER AS C INNER JOIN SALE AS S
   ON C.CustomerID  = S.CustomerID
  WHERE S.SaleID = 1
+ 
+ /*******************************/

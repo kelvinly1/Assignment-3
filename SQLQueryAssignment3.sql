@@ -3,7 +3,7 @@ GO
 
 
 CREATE  TABLE CUSTOMER(
-	CustomerID			Int				NOT NULL IDENTITY (1, 1),
+	CustomerID			Int			NOT NULL IDENTITY (1, 1),
 	LastName			Char(25)		NOT NULL,
 	FirstName			Char(25)		NOT NULL,
 	Address				Char(35)		NULL,
@@ -25,7 +25,7 @@ CREATE  TABLE EMPLOYEE(
 	);
 
 CREATE  TABLE VENDOR(
-	VendorID			Int				NOT NULL IDENTITY (1, 1),
+	VendorID			Int			NOT NULL IDENTITY (1, 1),
 	CompanyName			Char(100)		NULL,
 	ContactLastName			Char(25)		NOT NULL,
 	ContactFirstName		Char(25)		NOT NULL,
@@ -42,7 +42,7 @@ CREATE  TABLE VENDOR(
 /*****   ITEM Table As Used in Chapter03   **************************************/
 
 CREATE  TABLE ITEM(
-	ItemID				Int	 			NOT NULL IDENTITY (1,1),
+	ItemID				Int	 	NOT NULL IDENTITY (1,1),
 	ItemDescription			VarChar(255)	NOT NULL,
 	PurchaseDate			Date		NOT NULL,
 	ItemCost			Numeric(9,2)	NOT NULL,
